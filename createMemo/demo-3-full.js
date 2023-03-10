@@ -46,8 +46,8 @@ const displayCount = createMemo(() => {
 
 createEffect(() => {
   console.log('effect callback: ', displayCount());
-
-  // displayCount 是 createMemo() 返回的 getter. 当前 effectCallback 加入它的订阅列表
+  // 此createEffect执行期间，调用effectCallback期间：displayCount 是 createMemo() 返回的 getter
+  // 所以此effectCallback，是createMemo中signal的订阅者。
 });
 
 setTimeout(() => {
