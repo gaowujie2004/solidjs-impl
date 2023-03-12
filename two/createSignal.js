@@ -24,7 +24,6 @@ export function createSignal(value) {
   return [read, write];
 }
 
-
 function cleanup(running) {
   for (const dep of running.dependencies) {
     dep.delete(running);
@@ -45,7 +44,7 @@ export function createEffect(fn) {
 
   const running = {
     execute,
-    dependencies: new Set()
+    dependencies: new Set(),
   };
 
   execute();
