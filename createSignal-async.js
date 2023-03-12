@@ -30,7 +30,9 @@ function createEffect(effectCallbackFn) {
 const [getCount, setCount] = createSignal(0);
 
 createEffect(() => {
-  // TODO: 异步使用 getter 无法追踪
+  // TODO: 异步使用 getter 无法追踪，因为getter调用进行依赖收集，是同步进行的。
+  // TODO: 当effectCallback调用时，因为setTimeout是异步的，所有等effectCallback执行完后，才会执行定时器callback。
+  // TODO: 当定时器callback执行时，currentSubscriber等于null。具体看 createEffect内部代码
   setTimeout(() => {
     console.log('--响应式执行1，count:', getCount());
     console.log('--响应式执行2，count:', getCount());
